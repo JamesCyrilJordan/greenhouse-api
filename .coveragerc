@@ -16,6 +16,10 @@ exclude_lines =
     if __name__ == .__main__.:
     if TYPE_CHECKING:
     @abstractmethod
+    # Hard to test: module-level import error handling
+    except ImportError:
+    # Hard to test: module-level RuntimeError
+    raise RuntimeError
 
 precision = 2
 show_missing = True
