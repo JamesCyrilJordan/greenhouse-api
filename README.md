@@ -562,6 +562,80 @@ The API logs all operations and errors. Logs are output to stdout with INFO leve
 - Verify `DATABASE_URL` is correct
 - Ensure database driver is installed (for PostgreSQL/MySQL)
 
+## Testing
+
+The project includes a comprehensive test suite with 100% code coverage target.
+
+### Running Tests
+
+**Install test dependencies** (if not already installed):
+```bash
+pip install -r requirements.txt
+```
+
+**Run all tests**:
+```bash
+pytest
+```
+
+**Run tests with coverage report**:
+```bash
+pytest --cov=app --cov-report=term-missing
+```
+
+**Generate HTML coverage report**:
+```bash
+pytest --cov=app --cov-report=html
+# Open htmlcov/index.html in your browser
+```
+
+**Run specific test file**:
+```bash
+pytest tests/test_main.py
+```
+
+**Run specific test**:
+```bash
+pytest tests/test_main.py::TestHealthEndpoint::test_health_endpoint_no_auth
+```
+
+### Test Structure
+
+```
+tests/
+├── __init__.py
+├── conftest.py              # Shared fixtures
+├── test_main.py            # API endpoint tests
+├── test_auth.py            # Authentication tests
+├── test_schemas.py         # Pydantic schema tests
+├── test_models.py          # Database model tests
+├── test_db.py              # Database configuration tests
+├── test_config.py          # Configuration tests
+└── test_error_handling.py  # Error handling tests
+```
+
+### Test Coverage
+
+The test suite aims for 100% code coverage and includes:
+- ✅ All API endpoints (health, create, list)
+- ✅ Authentication and authorization
+- ✅ Request validation
+- ✅ Error handling (database errors, unexpected errors)
+- ✅ Pagination and filtering
+- ✅ Database operations
+- ✅ Schema validation
+
+### Using Make Commands
+
+If you have `make` installed, you can use:
+
+```bash
+make test          # Run tests
+make test-cov      # Run tests with coverage
+make test-html      # Generate HTML coverage report
+make clean          # Clean test artifacts
+```
+
 ## License
 
 [Add your license here]
